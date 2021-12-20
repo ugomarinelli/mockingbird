@@ -3157,7 +3157,7 @@
 			repositoryURL = "https://github.com/apple/swift-syntax.git";
 			requirement = {
 				kind = exactVersion;
-				version = 0.50400.0;
+				version = 0.50500.0;
 			};
 		};
 		287F852325194EF5007D135D /* XCRemoteSwiftPackageReference "SourceKitten" */ = {
