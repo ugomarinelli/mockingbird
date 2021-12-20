@@ -11,14 +11,17 @@ on:
 jobs:
   build:
     name: Build Signed Artifacts
-    runs-on: macOS-latest
+    runs-on: macOS-11
     steps:
-    - uses: actions/checkout@v2
-    - name: Import Secrets
-      uses: apple-actions/import-codesign-certs@v1
+    - uses: maxim-lobanov/setup-xcode@v1
       with:
-        p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
-        p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
+        xcode-version: latest
+    - uses: actions/checkout@v2
+    #- name: Import Secrets
+     # uses: apple-actions/import-codesign-certs@v1
+    #  with:
+    #    p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
+    #    p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
     - name: Print Debug Info
       run: make print-debug-info
     - name: Set Up Project
@@ -59,14 +62,17 @@ jobs:
 
   build-cisafe:
     name: Build CI-Safe Signed Artifacts
-    runs-on: macOS-latest
+    runs-on: macOS-11
     steps:
-    - uses: actions/checkout@v2
-    - name: Import Secrets
-      uses: apple-actions/import-codesign-certs@v1
+    - uses: maxim-lobanov/setup-xcode@v1
       with:
-        p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
-        p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
+        xcode-version: latest
+    - uses: actions/checkout@v2
+    #- name: Import Secrets
+    #  uses: apple-actions/import-codesign-certs@v1
+    #  with:
+     #   p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
+     #   p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
     - name: Print Debug Info
       run: make print-debug-info
     - name: Set Up Project
@@ -75,8 +81,8 @@ jobs:
       run: make clean
     - name: Build
       env:
-        AC_USERNAME: ${{ secrets.AC_USERNAME }}
-        AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
+        #AC_USERNAME: ${{ secrets.AC_USERNAME }}
+        #AC_PASSWORD: ${{ secrets.AC_PASSWORD }}
         HERMETIC: 1
       run: make signed-release
     - name: Document SHAs
